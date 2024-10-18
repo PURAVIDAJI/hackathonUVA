@@ -1,7 +1,7 @@
 import { Text } from "react-native";
 
 function FavoriteItems() {
-  return <Text>FavoriteItems screen</Text>;
+  return <ItemOutput />;
 }
 
 export default FavoriteItems;

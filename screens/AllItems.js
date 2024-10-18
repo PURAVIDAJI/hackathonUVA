@@ -1,7 +1,8 @@
 import { Text } from "react-native";
+import ItemOutput from "../component/ItemOutput/ItemOutput";
 
 function AllItems() {
-  return <Text>AllItems screen</Text>;
+  return <ItemOutput />;
 }
 
 export default AllItems;
