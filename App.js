@@ -21,6 +21,7 @@ import SearchResults from "./screens/SearchResults";
 import { TouchableOpacity } from "react-native"; // 添加这一行
 import { useState } from "react";
 import LoginScreen from "./Login/LoginScreen";
+import CreateAccount from "./Login/CreateAccount";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -108,12 +109,18 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           {/* {!isLoggedIn ? (
-            // 로그인 상태가 false면 로그인 화면을 먼저 보여줌
-            <Stack.Screen
-              name="Login"
-              component={LoginScreen}
-              options={{ headerShown: false }}
-            />
+            <>
+              <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="CreateAccount"
+                component={CreateAccount}
+                options={{ headerTitle: "Create Account" }}
+              />
+            </>
           ) : ( */}
           <>
             <Stack.Screen

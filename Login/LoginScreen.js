@@ -1,27 +1,32 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  Alert,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    // 간단한 유효성 검사 (나중에 실제 서버 인증으로 변경 가능)
+    // Simple validation (can be replaced with real server authentication)
     if (username === "admin" && password === "password") {
-      Alert.alert("로그인 성공", "환영합니다!");
-      // 로그인 성공 시 ItemsOverview로 이동
+      Alert.alert("Login Successful", "Welcome!");
+      // Navigate to ItemsOverview after successful login
       navigation.replace("ItemsOverview");
     } else {
-      Alert.alert(
-        "로그인 실패",
-        "사용자 이름 또는 비밀번호가 올바르지 않습니다."
-      );
+      Alert.alert("Login Failed", "The username or password is incorrect.");
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>로그인</Text>
+      <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.input}
         placeholder="Username"
@@ -35,7 +40,14 @@ export default function LoginScreen({ navigation }) {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="로그인" onPress={handleLogin} />
+      <Button title="Login" onPress={handleLogin} />
+
+      {/* Create Account Link */}
+      <TouchableOpacity onPress={() => navigation.navigate("CreateAccount")}>
+        <Text style={styles.createAccountText}>
+          Don't have an account? Create one
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -58,5 +70,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     paddingHorizontal: 10,
+  },
+  createAccountText: {
+    color: "blue",
+    textAlign: "center",
+    marginTop: 20,
   },
 });
