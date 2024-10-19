@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"; // 导入图标库
@@ -17,6 +17,13 @@ function DetailItem() {
     category,
     description,
   } = route.params; // 解构获取传递的参数
+
+  const [isFavorited, setIsFavorited] = useState(myFav); // 用来控制爱心的状态
+
+  // 点击爱心图标时触发的函数
+  const toggleFavorite = () => {
+    setIsFavorited(!isFavorited); // 切换 myFav 状态
+  };
 
   return (
     <View style={styles.container}>
@@ -40,12 +47,15 @@ function DetailItem() {
         Likes: {likes}, Chat: {chat}
       </Text>
       <View style={styles.bottomBar}>
-        <AntDesign
-          name="hearto"
-          size={28}
-          color="black"
-          style={styles.heartIcon}
-        />
+        {/* 点击爱心图标的按钮 */}
+        <TouchableOpacity onPress={toggleFavorite}>
+          <AntDesign
+            name={isFavorited ? "heart" : "hearto"} // 根据状态选择图标
+            size={28}
+            color={isFavorited ? "red" : "black"} // 根据状态选择颜色
+            style={styles.heartIcon}
+          />
+        </TouchableOpacity>
         <Text style={styles.priceBottom}>{price}</Text>
         <TouchableOpacity style={styles.chatButton}>
           <Text style={styles.chatButtonText}>Start Chat</Text>

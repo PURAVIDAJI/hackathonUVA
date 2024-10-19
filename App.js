@@ -19,6 +19,8 @@ import IconButton from "./component/UI/IconButton";
 import SearchResults from "./screens/SearchResults";
 
 import { TouchableOpacity } from "react-native"; // 添加这一行
+import { useState } from "react";
+import LoginScreen from "./Login/LoginScreen";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -99,32 +101,49 @@ function ItemsOverview() {
   );
 }
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <>
       <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
-            name="ItemsOverview"
-            component={ItemsOverview}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="Search" component={Search} />
+          {/* {!isLoggedIn ? (
+            // 로그인 상태가 false면 로그인 화면을 먼저 보여줌
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{ headerShown: false }}
+            />
+          ) : ( */}
+          <>
+            <Stack.Screen
+              name="ItemsOverview"
+              component={ItemsOverview}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Search" component={Search} />
 
-          <Stack.Screen name="SearchResults" component={SearchResults} />
+            <Stack.Screen name="SearchResults" component={SearchResults} />
+            <Stack.Screen name="CreatePost" component={CreatePost} />
 
-          <Stack.Screen
-            name="DetailItem"
-            component={DetailItem}
-            options={({ navigation }) => ({
-              headerTitle: "",
-              headerLeft: () => (
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <MaterialCommunityIcons name="home" size={24} color="black" />
-                </TouchableOpacity>
-              ),
-            })}
-          />
+            <Stack.Screen
+              name="DetailItem"
+              component={DetailItem}
+              options={({ navigation }) => ({
+                headerTitle: "",
+                headerLeft: () => (
+                  <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <MaterialCommunityIcons
+                      name="home"
+                      size={24}
+                      color="black"
+                    />
+                  </TouchableOpacity>
+                ),
+              })}
+            />
+          </>
+          {/* )} */}
         </Stack.Navigator>
       </NavigationContainer>
     </>
