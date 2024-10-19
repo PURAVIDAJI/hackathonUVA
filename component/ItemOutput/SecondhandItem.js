@@ -2,9 +2,17 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Octicons from "@expo/vector-icons/Octicons";
+import { useNavigation } from "@react-navigation/native";
 function SecondhandItem({ title, price, likes, chat, image }) {
+  const navigation = useNavigation();
+  function itemDetailHandler() {
+    navigation.navigate("DetailItem");
+  }
   return (
-    <Pressable>
+    <Pressable
+      onPress={itemDetailHandler}
+      style={({ pressed }) => pressed && style.pressed}
+    >
       <View style={style.Item}>
         <View style={style.ImageContainer}>
           <Image source={image} style={style.image} resizeMode="cover" />
@@ -60,6 +68,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
   },
+  pressed: { opacity: 0.75 },
 
   ImageContainer: {
     flex: 3,

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CreatePost from "./screens/CreatePost";
@@ -8,11 +8,13 @@ import AllItems from "./screens/AllItems";
 import FavoriteItems from "./screens/FavoriteItems";
 import Chat from "./screens/Chat";
 import Profile from "./screens/Profile";
+import DetailItem from "./screens/DetailItem";
 import { GlobalStyles } from "./constants/styles";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Octicons from "@expo/vector-icons/Octicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import IconButton from "./component/UI/IconButton";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -34,6 +36,14 @@ function ItemsOverview() {
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
             <Octicons name="home" size={size} color={color} />
+          ),
+          headerRight: () => (
+            <IconButton
+              name="search"
+              size={24}
+              color="white"
+              onPress={() => useNavigation.navigate("Search")}
+            />
           ),
         }}
       />
@@ -93,6 +103,7 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="Search" component={Search} />
+          <Stack.Screen name="DetailItem" component={DetailItem} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
