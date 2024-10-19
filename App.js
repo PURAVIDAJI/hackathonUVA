@@ -15,10 +15,12 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Octicons from "@expo/vector-icons/Octicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import IconButton from "./component/UI/IconButton";
+import SearchResults from "./screens/SearchResults";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 function ItemsOverview() {
+  const navigation = useNavigation();
   return (
     <BottomTabs.Navigator
       screenOptions={{
@@ -42,7 +44,7 @@ function ItemsOverview() {
               name="search"
               size={24}
               color="white"
-              onPress={() => useNavigation.navigate("Search")}
+              onPress={() => navigation.navigate("Search")}
             />
           ),
         }}
@@ -104,6 +106,7 @@ export default function App() {
           />
           <Stack.Screen name="Search" component={Search} />
           <Stack.Screen name="DetailItem" component={DetailItem} />
+          <Stack.Screen name="SearchResults" component={SearchResults} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
