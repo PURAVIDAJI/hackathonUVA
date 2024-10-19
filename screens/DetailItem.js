@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'; // 导入图标库
 import { AntDesign } from '@expo/vector-icons'; // 导入爱心图标
+import { dummyData } from "../constants/dummyData";
 
 
 function DetailItem() {
   const route = useRoute();
-  const { title, price, likes, chat, image, user, myFav, category, description } = route.params; // 解构获取传递的参数
+  const { title, price, likes, chat, image, user, myFav: initialMyFav, category, description } = route.params; // 解构获取传递的参数
+  // Set the initial state of myFav from the route parameter
+  const [myFav, setMyFav] = useState(initialMyFav);
+
+  // Toggle the favorite status
+  const toggleFavorite = () => {
+    // 更新本地状态
+    setMyFav((prevFav) => !prevFav);
+
+    // 同时更新dummyData的状态
+    const itemIndex = dummyData.findIndex((item) => item.id === id);
+    if (itemIndex !== -1) {
+      dummyData[itemIndex].myFav = !dummyData[itemIndex].myFav;
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -30,7 +45,16 @@ function DetailItem() {
 
       <Text style={styles.likes}>Likes: {likes}, Chat: {chat}</Text>
       <View style={styles.bottomBar}>
-        <AntDesign name="hearto" size={28} color="black" style={styles.heartIcon} /> 
+        {/* Touchable Heart Icon */}
+        <TouchableOpacity onPress={toggleFavorite}>
+          <AntDesign
+            name={myFav ? 'heart' : 'hearto'} // Filled heart if myFav is true, outlined otherwise
+            size={28}
+            color={myFav ? 'red' : 'black'} // Red if myFav is true
+            style={styles.heartIcon}
+          />
+        </TouchableOpacity>
+
         <Text style={styles.priceBottom}>{price}</Text> 
         <TouchableOpacity style={styles.chatButton}>
           <Text style={styles.chatButtonText}>Start Chat</Text>
