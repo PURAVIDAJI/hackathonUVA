@@ -15,12 +15,17 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Octicons from "@expo/vector-icons/Octicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import IconButton from "./component/UI/IconButton";
+
 import SearchResults from "./screens/SearchResults";
+
+import { TouchableOpacity } from "react-native"; // 添加这一行
+
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 function ItemsOverview() {
   const navigation = useNavigation();
+
   return (
     <BottomTabs.Navigator
       screenOptions={{
@@ -105,8 +110,21 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="Search" component={Search} />
-          <Stack.Screen name="DetailItem" component={DetailItem} />
+
           <Stack.Screen name="SearchResults" component={SearchResults} />
+
+          <Stack.Screen
+            name="DetailItem"
+            component={DetailItem}
+            options={({ navigation }) => ({
+              headerTitle: "",
+              headerLeft: () => (
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <MaterialCommunityIcons name="home" size={24} color="black" />
+                </TouchableOpacity>
+              ),
+            })}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
