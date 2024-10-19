@@ -42,8 +42,9 @@ function DetailItem() {
       </View>
       <Text style={styles.description}>{description}</Text>
 
-
-      <Text style={styles.likes}>Likes: {likes}, Chat: {chat}</Text>
+      <Text style={styles.likes}>
+        Likes: {likes}, Chat: {chat}
+      </Text>
       <View style={styles.bottomBar}>
         {/* Touchable Heart Icon */}
         <TouchableOpacity onPress={toggleFavorite}>
@@ -56,6 +57,7 @@ function DetailItem() {
         </TouchableOpacity>
 
         <Text style={styles.priceBottom}>{price}</Text> 
+
         <TouchableOpacity style={styles.chatButton}>
           <Text style={styles.chatButtonText}>Start Chat</Text>
         </TouchableOpacity>
@@ -70,25 +72,25 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 200,
     borderRadius: 10,
     marginBottom: 15,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 0,
     marginTop: 10,
   },
   description: {
     fontSize: 18,
-    color: 'gray',
+    color: "gray",
     marginVertical: 10,
   },
   price: {
     fontSize: 20,
-    color: 'green',
+    color: "green",
     marginBottom: 10,
   },
   likes: {
@@ -98,31 +100,31 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   userContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 8,
   },
   avatar: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'lightgray', // 头像背景色
+    backgroundColor: "lightgray", // 头像背景色
     marginRight: 10,
   },
   userName: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   underline: {
     height: 2, // 下划线的高度
-    backgroundColor: 'black', // 下划线的颜色
-    width: '100%', // 设置宽度为 80%
-    alignSelf: 'center', // 居中对齐
+    backgroundColor: "black", // 下划线的颜色
+    width: "100%", // 设置宽度为 80%
+    alignSelf: "center", // 居中对齐
     marginVertical: 5, // 上下留白
   },
   categoryContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 3,
   },
   categoryLabel: {
@@ -130,43 +132,43 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   categoryBox: {
-    backgroundColor: '#d0d0d0', // 分类框的背景色
+    backgroundColor: "#d0d0d0", // 分类框的背景色
     borderRadius: 10, // 圆角
     padding: 5,
     marginLeft: 5,
   },
   categoryText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   bottomBar: {
-    backgroundColor: '#d0d0d0', // 底部栏背景色
+    backgroundColor: "#d0d0d0", // 底部栏背景色
     padding: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between', // 元素之间保持间距
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between", // 元素之间保持间距
     borderRadius: 10,
-    marginTop: 'auto', // 将底部栏固定在页面底部
+    marginTop: "auto", // 将底部栏固定在页面底部
   },
   heartIcon: {
     marginLeft: 10,
   },
   priceBottom: {
     fontSize: 20,
-    color: 'black',
+    color: "black",
     marginLeft: -100,
   },
   chatButton: {
-    backgroundColor: '#707070', // 更深的灰色背景
+    backgroundColor: "#707070", // 更深的灰色背景
     paddingVertical: 10,
     borderRadius: 10, // 圆角
     paddingHorizontal: 20,
     borderRadius: 5,
   },
   chatButtonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 

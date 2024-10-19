@@ -1,7 +1,8 @@
 export const DUMMY_ITEMS = [
   {
     id: "e1",
-    title: "Item name",
+    title: "Folding Matress",
+
     price: "$300",
     description: "It is good",
     likes: "2",
@@ -14,7 +15,8 @@ export const DUMMY_ITEMS = [
   },
   {
     id: "e2",
-    title: "Item name",
+
+    title: "Green Cozy Single Sofa",
     price: "$300",
     description: "It is good",
     likes: "8",
@@ -27,7 +29,9 @@ export const DUMMY_ITEMS = [
   },
   {
     id: "e3",
-    title: "Item name",
+
+    title: "Coputer dEsK",
+
     price: "$300",
     description: "It is good",
     likes: "19",
@@ -40,7 +44,8 @@ export const DUMMY_ITEMS = [
   },
   {
     id: "e4",
-    title: "Item name",
+    title: "cozy gray sofa",
+
     price: "$300",
     description: "It is good",
     likes: "7",
@@ -53,7 +58,8 @@ export const DUMMY_ITEMS = [
   },
   {
     id: "e5",
-    title: "Item name",
+    title: "snow white custom dress",
+
     price: "$300",
     description: "It is good",
     likes: "32",

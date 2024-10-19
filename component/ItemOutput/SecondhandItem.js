@@ -3,10 +3,31 @@ import { GlobalStyles } from "../../constants/styles";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Octicons from "@expo/vector-icons/Octicons";
 import { useNavigation } from "@react-navigation/native";
-function SecondhandItem({ title, price, likes, chat, image, user, myFav, category, description }) {
+
+function SecondhandItem({
+  title,
+  price,
+  likes,
+  chat,
+  image,
+  user,
+  myFav,
+  category,
+  description,
+}) {
   const navigation = useNavigation();
   function itemDetailHandler() {
-    navigation.navigate("DetailItem", { title, price, likes, chat, image, user, myFav, category, description });
+    navigation.navigate("DetailItem", {
+      title,
+      price,
+      likes,
+      chat,
+      image,
+      user,
+      myFav,
+      category,
+      description,
+    });
   }
   return (
     <Pressable
