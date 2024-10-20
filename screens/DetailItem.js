@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"; // 导入图标库
@@ -52,6 +53,15 @@ function DetailItem() {
         Likes: {likes}, Chat: {chat}
       </Text>
       <View style={styles.bottomBar}>
+        {/* 点击爱心图标的按钮 */}
+        <TouchableOpacity onPress={toggleFavorite}>
+          <AntDesign
+            name={isFavorited ? "heart" : "hearto"} // 根据状态选择图标
+            size={28}
+            color={isFavorited ? "red" : "black"} // 根据状态选择颜色
+            style={styles.heartIcon}
+          />
+        </TouchableOpacity>
         {/* 点击爱心图标的按钮 */}
         <TouchableOpacity onPress={toggleFavorite}>
           <AntDesign
