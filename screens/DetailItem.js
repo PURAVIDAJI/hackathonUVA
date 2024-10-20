@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { useRoute } from "@react-navigation/native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"; // 导入图标库
 import { AntDesign } from "@expo/vector-icons"; // 导入爱心图标
@@ -27,25 +34,27 @@ function DetailItem() {
 
   return (
     <View style={styles.container}>
-      <Image source={image} style={styles.image} />
-      <View style={styles.userContainer}>
-        <View style={styles.avatar} />
-        <Text style={styles.userName}>{user}</Text>
-      </View>
-      <Text style={styles.title}>{title}</Text>
-      <View style={styles.underline} />
-      <View style={styles.categoryContainer}>
-        <MaterialIcons name="category" size={28} color="black" />
-        <Text style={styles.categoryLabel}>Category: </Text>
-        <View style={styles.categoryBox}>
-          <Text style={styles.categoryText}>{category}</Text>
+      <ScrollView>
+        <Image source={{ uri: image }} style={styles.image} />
+        <View style={styles.userContainer}>
+          <View style={styles.avatar} />
+          <Text style={styles.userName}>{user}</Text>
         </View>
-      </View>
-      <Text style={styles.description}>{description}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.underline} />
+        <View style={styles.categoryContainer}>
+          <MaterialIcons name="category" size={28} color="black" />
+          <Text style={styles.categoryLabel}>Category: </Text>
+          <View style={styles.categoryBox}>
+            <Text style={styles.categoryText}>{category}</Text>
+          </View>
+        </View>
+        <Text style={styles.description}>{description}</Text>
 
-      <Text style={styles.likes}>
-        Likes: {likes}, Chat: {chat}
-      </Text>
+        <Text style={styles.likes}>
+          Likes: {likes}, Chat: {chat}
+        </Text>
+      </ScrollView>
       <View style={styles.bottomBar}>
         {/* 点击爱心图标的按钮 */}
         <TouchableOpacity onPress={toggleFavorite}>
@@ -56,7 +65,7 @@ function DetailItem() {
             style={styles.heartIcon}
           />
         </TouchableOpacity>
-        <Text style={styles.priceBottom}>{price}</Text>
+        <Text style={styles.priceBottom}>${price}</Text>
         <TouchableOpacity style={styles.chatButton}>
           <Text style={styles.chatButtonText}>Start Chat</Text>
         </TouchableOpacity>
@@ -72,7 +81,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 200,
+    height: 300,
     borderRadius: 10,
     marginBottom: 15,
   },

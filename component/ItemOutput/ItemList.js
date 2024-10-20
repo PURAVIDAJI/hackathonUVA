@@ -3,14 +3,18 @@ import { GlobalStyles } from "../../constants/styles";
 import SecondhandItem from "./SecondhandItem";
 
 function renderSecondItem(itemData) {
-  return <SecondhandItem {...itemData.item} />;
+  return (
+    <>
+      <SecondhandItem {...itemData.item} />
+    </>
+  );
 }
 function ItemList({ items }) {
   return (
     <FlatList
       data={items}
       renderItem={renderSecondItem}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => String(item.item_id)}
     />
   );
 }

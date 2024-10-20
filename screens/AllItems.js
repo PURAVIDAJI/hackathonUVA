@@ -8,13 +8,15 @@ import {
 } from "react-native";
 import ItemOutput from "../component/ItemOutput/ItemOutput";
 import { GlobalStyles } from "../constants/styles";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useCallback, useState } from "react";
 
 function AllItems() {
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <ItemOutput />
+      <ItemOutput fav={0} />
       <Pressable
         onPress={() => navigation.navigate("CreatePost")}
         style={({ pressed }) => [

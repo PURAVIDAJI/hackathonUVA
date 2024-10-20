@@ -1,16 +1,18 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
+
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Octicons from "@expo/vector-icons/Octicons";
 import { useNavigation } from "@react-navigation/native";
 
 function SecondhandItem({
+  item_id,
   title,
   price,
   likes,
   chat,
   image,
-  user,
+  user_name,
   myFav,
   category,
   description,
@@ -18,12 +20,13 @@ function SecondhandItem({
   const navigation = useNavigation();
   function itemDetailHandler() {
     navigation.navigate("DetailItem", {
+      item_id,
       title,
       price,
       likes,
       chat,
       image,
-      user,
+      user_name,
       myFav,
       category,
       description,
@@ -36,7 +39,11 @@ function SecondhandItem({
     >
       <View style={style.Item}>
         <View style={style.ImageContainer}>
-          <Image source={image} style={style.image} resizeMode="cover" />
+          <Image
+            source={{ uri: image }}
+            style={style.image}
+            resizeMode="cover"
+          />
         </View>
         <View style={style.Text}>
           <View style={style.First}>
@@ -45,7 +52,7 @@ function SecondhandItem({
             >
               {title}
             </Text>
-            <Text style={{ fontSize: 15 }}>{price}</Text>
+            <Text style={{ fontSize: 15 }}>${price}</Text>
           </View>
           <View style={style.Second}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>

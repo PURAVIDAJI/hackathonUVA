@@ -55,11 +55,18 @@ app.post("/create-post", (req, res) => {
 });
 //item get API
 app.get("/items", (req, res) => {
-  const query = "SELECT * FROM product";
+  const query = `
+    SELECT product.item_id, product.title, product.price, product.description, product.image, 
+           product.likes, product.chat, product.category, product.myFav, product.date, 
+           user.user_name 
+    FROM product 
+    INNER JOIN user ON product.user_id = user.id;`;
   db.query(query, (err, result) => {
     if (err) {
       console.error("MySQL query error:", err);
-      return res.status(500).json({ error: "Failed to fetch items" });
+      return res
+        .status(500)
+        .json({ error: "Failed to fetch items", details: err.message });
     }
     return res.status(200).json(result); //result -json
   });
