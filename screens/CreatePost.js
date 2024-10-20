@@ -11,7 +11,9 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import * as ImagePicker from "react-native-image-picker";
+import { Picker } from "@react-native-picker/picker";
 import { GlobalStyles } from "../constants/styles";
+import { useNavigation } from "@react-navigation/native";
 
 const CreatePost = () => {
   const {
@@ -20,7 +22,9 @@ const CreatePost = () => {
     formState: { errors },
   } = useForm();
   const [imageUri, setImageUri] = useState(null);
+  const [category, setCategory] = useState("furniture");
 
+  const navigation = useNavigation();
   // Function to pick an image
   const pickImage = () => {
     ImagePicker.launchImageLibrary({}, (response) => {
@@ -34,10 +38,34 @@ const CreatePost = () => {
   const onSubmit = (data) => {
     const postData = {
       ...data,
+      category,
       image: imageUri,
+      user_id: "11",
+      date: new Date().toISOString().split("T")[0],
     };
-    console.log(postData); // Add logic here to send postData to your server
-    // Send postData to server
+    console.log(postData);
+
+    fetch("http://10.0.2.2:3000/create-post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Post submitted successfully!");
+          navigation.navigate("AllItems");
+        } else {
+          response.json().then((data) => {
+            console.log("Error response:", data);
+            alert("Error submitting post: " + response.status);
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -84,6 +112,22 @@ const CreatePost = () => {
       {errors.price && (
         <Text style={styles.errorText}>{errors.price.message}</Text>
       )}
+      {/*category*/}
+
+      <Text>Category</Text>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={category}
+          onValueChange={(itemValue) => setCategory(itemValue)}
+          style={styles.picker}
+        >
+          <Picker.Item label="Furniture" value="furniture" />
+          <Picker.Item label="Electronics" value="electronics" />
+          <Picker.Item label="Clothing" value="clothing" />
+          <Picker.Item label="Books" value="books" />
+          <Picker.Item label="Other" value="other" />
+        </Picker>
+      </View>
 
       {/* Description input */}
       <Text>Description</Text>
@@ -141,6 +185,16 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     marginBottom: 10,
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  picker: {
+    height: 50,
+    width: "100%",
   },
 });
 
