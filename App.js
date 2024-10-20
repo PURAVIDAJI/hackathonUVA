@@ -26,7 +26,7 @@ import CreateAccount from "./Login/CreateAccount";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
-function ItemsOverview() {
+function ItemsOverview({ setIsLoggedIn }) {
   const navigation = useNavigation();
 
   return (
@@ -85,7 +85,6 @@ function ItemsOverview() {
       />
       <BottomTabs.Screen
         name="Profile"
-        component={Profile}
         options={{
           title: "Account",
           tabBarLabel: "Account",
@@ -97,7 +96,9 @@ function ItemsOverview() {
             />
           ),
         }}
-      />
+      >
+        {(props) => <Profile {...props} setIsLoggedIn={setIsLoggedIn} />}
+      </BottomTabs.Screen>
     </BottomTabs.Navigator>
   );
 }
@@ -108,49 +109,56 @@ export default function App() {
       <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator>
-          {/* {!isLoggedIn ? (
+          {!isLoggedIn ? (
             <>
-              <Stack.Screen
-                name="Login"
-                component={LoginScreen}
-                options={{ headerShown: false }}
-              />
+              <Stack.Screen name="Login" options={{ headerShown: "false" }}>
+                {(props) => (
+                  <LoginScreen {...props} setIsLoggedIn={setIsLoggedIn} />
+                )}
+              </Stack.Screen>
               <Stack.Screen
                 name="CreateAccount"
-                component={CreateAccount}
                 options={{ headerTitle: "Create Account" }}
+              >
+                {(props) => (
+                  <CreateAccount {...props} setIsLoggedIn={setIsLoggedIn} />
+                )}
+              </Stack.Screen>
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name="ItemsOverview"
+                options={{ headerShown: false }}
+              >
+                {(props) => (
+                  <ItemsOverview {...props} setIsLoggedIn={setIsLoggedIn} />
+                )}
+              </Stack.Screen>
+
+              <Stack.Screen name="Search" component={Search} />
+
+              <Stack.Screen name="SearchResults" component={SearchResults} />
+              <Stack.Screen name="CreatePost" component={CreatePost} />
+
+              <Stack.Screen
+                name="DetailItem"
+                component={DetailItem}
+                options={({ navigation }) => ({
+                  headerTitle: "",
+                  headerLeft: () => (
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                      <MaterialCommunityIcons
+                        name="home"
+                        size={24}
+                        color="black"
+                      />
+                    </TouchableOpacity>
+                  ),
+                })}
               />
             </>
-          ) : ( */}
-          <>
-            <Stack.Screen
-              name="ItemsOverview"
-              component={ItemsOverview}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="Search" component={Search} />
-
-            <Stack.Screen name="SearchResults" component={SearchResults} />
-            <Stack.Screen name="CreatePost" component={CreatePost} />
-
-            <Stack.Screen
-              name="DetailItem"
-              component={DetailItem}
-              options={({ navigation }) => ({
-                headerTitle: "",
-                headerLeft: () => (
-                  <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <MaterialCommunityIcons
-                      name="home"
-                      size={24}
-                      color="black"
-                    />
-                  </TouchableOpacity>
-                ),
-              })}
-            />
-          </>
-          {/* )} */}
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     </>
