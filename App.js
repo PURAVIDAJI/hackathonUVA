@@ -21,11 +21,13 @@ import SearchResults from "./screens/SearchResults";
 import { TouchableOpacity } from "react-native"; // 添加这一行
 import { useState } from "react";
 import LoginScreen from "./Login/LoginScreen";
+import CreateAccount from "./Login/CreateAccount";
+
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
-function ItemsOverview() {
+function ItemsOverview({ setIsLoggedIn }) {
   const navigation = useNavigation();
 
   return (
@@ -82,9 +84,8 @@ function ItemsOverview() {
           ),
         }}
       />
-      <BottomTabs.Screen
+ <BottomTabs.Screen
         name="Profile"
-        component={Profile}
         options={{
           title: "Account",
           tabBarLabel: "Account",
@@ -96,7 +97,9 @@ function ItemsOverview() {
             />
           ),
         }}
-      />
+      >
+        {props => <Profile {...props} setIsLoggedIn={setIsLoggedIn} />}
+      </BottomTabs.Screen>
     </BottomTabs.Navigator>
   );
 }
@@ -107,20 +110,32 @@ export default function App() {
       <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator>
-          {/* {!isLoggedIn ? (
-            // 로그인 상태가 false면 로그인 화면을 먼저 보여줌
-            <Stack.Screen
-              name="Login"
-              component={LoginScreen}
-              options={{ headerShown: false }}
-            />
-          ) : ( */}
-          <>
+        {!isLoggedIn ? (
+            <>
+              <Stack.Screen
+                name="Login"
+                options={{ headerShown: "false" }}
+              >
+                {props => <LoginScreen {...props} setIsLoggedIn={setIsLoggedIn} />} 
+              </Stack.Screen>
+              <Stack.Screen
+                name="CreateAccount"
+                options={{ headerTitle: "Create Account" }}
+              >
+                {props => <CreateAccount {...props} setIsLoggedIn={setIsLoggedIn} />}
+              </Stack.Screen>
+            </>
+          ) : (
+            <>
             <Stack.Screen
               name="ItemsOverview"
-              component={ItemsOverview}
               options={{ headerShown: false }}
-            />
+            >
+              {props => <ItemsOverview {...props} setIsLoggedIn={setIsLoggedIn} />}
+            </Stack.Screen>
+            
+            
+            
             <Stack.Screen name="Search" component={Search} />
 
             <Stack.Screen name="SearchResults" component={SearchResults} />
@@ -143,7 +158,7 @@ export default function App() {
               })}
             />
           </>
-          {/* )} */}
+           )} 
         </Stack.Navigator>
       </NavigationContainer>
     </>
